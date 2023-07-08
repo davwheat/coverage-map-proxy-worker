@@ -1,0 +1,6 @@
+name = "coverage-map-proxy-worker"
+main = "dist/worker.mjs"
+compatibility_date = "2023-06-28"
+
+[placement]
+mode = "smart"

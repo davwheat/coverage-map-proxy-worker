@@ -1,0 +1,17 @@
+{
+  "name": "coverage-map-proxy-worker",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "start": "wrangler dev",
+    "format": "prettier --write .",
+    "build": "esbuild src/worker.ts --format=esm --bundle --minify --loader:.html=text --outfile=dist/worker.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230628.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6",
+    "wrangler": "^3.1.2"
+  }
+}
