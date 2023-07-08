@@ -116,10 +116,10 @@ const handler: ExportedHandler = {
         if (request.headers.get('If-None-Match') === ETAG) {
           return new Response(null, { status: 304, headers: { ETag: ETAG } });
         } else {
-          return new Response(BlankTile.getBlankTile(), {
-            status: 404,
+          return new Response(Error502, {
+            status: 502,
             headers: {
-              'Content-Type': 'image/png',
+              'Content-Type': 'text/html',
               ETag: ETAG,
               ...GLOBAL_RESPONSE_HEADERS,
             },
