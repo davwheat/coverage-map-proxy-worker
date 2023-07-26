@@ -39,16 +39,12 @@ export default class B2EndpointGenerator {
   private static verifyPlmn(plmn: string): plmn is ValidPlmns {
     if (!/^\d\d\d-\d\d\d?$/.test(plmn)) return false;
 
-    return plmn in Object.keys(TileVersions);
+    return Object.keys(TileVersions).includes(plmn);
   }
 
   private static generateB2Uri(networkName: string, countryCode: string, path: string): string {
     return `https://${B2EndpointGenerator.SERVER_HOSTNAME}/file/${B2EndpointGenerator.BUCKET_NAME}/${countryCode}/${networkName}${path}`;
   }
-
-  // private static getBlankTileUri(): string {
-  //   return `https://${B2EndpointGenerator.SERVER_HOSTNAME}/file/${B2EndpointGenerator.BUCKET_NAME}/256_blank_tile.png`;
-  // }
 
   static getB2Endpoint(uri: string): string | null {
     const subdomain = UriUtils.getSubdomain(uri);

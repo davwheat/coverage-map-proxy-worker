@@ -1,5 +1,6 @@
 export default class UriUtils {
   private static PUBLIC_URL_ROOT = '.coveragetiles.com';
+  // private static PUBLIC_URL_ROOT = '.local.davw.network';
 
   static getSubdomain(url: string): string | null {
     const urlObj = new URL(url);
