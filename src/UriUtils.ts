@@ -16,4 +16,13 @@ export default class UriUtils {
 
     return urlObj.pathname;
   }
+
+  static getTilesVersion(url: string): string | null {
+    // https://234-15.coveragetiles.com/2023-07-04/4g/0/0/0.png
+    const path = UriUtils.getPath(url);
+    const pathParts = path.split('/');
+    const tilesVersion = pathParts?.[1];
+
+    return tilesVersion || null;
+  }
 }
