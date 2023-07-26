@@ -6,6 +6,7 @@
     "deploy": "wrangler deploy",
     "start": "wrangler dev",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "build": "esbuild src/worker.ts --format=esm --bundle --minify --loader:.html=text --outfile=dist/worker.mjs"
   },
   "devDependencies": {
