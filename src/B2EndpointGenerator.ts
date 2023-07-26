@@ -1,4 +1,7 @@
 import UriUtils from './UriUtils';
+import TileVersions from './tileVersions.json';
+
+type ValidPlmns = keyof typeof TileVersions;
 
 export default class B2EndpointGenerator {
   private static SERVER_HOSTNAME = 'f003.backblazeb2.com';
@@ -33,16 +36,14 @@ export default class B2EndpointGenerator {
     return null;
   }
 
-  private static verifyPlmn(plmn: string): boolean {
-    return /^\d\d\d-\d\d\d?$/.test(plmn);
+  private static verifyPlmn(plmn: string): plmn is ValidPlmns {
+    if (!/^\d\d\d-\d\d\d?$/.test(plmn)) return false;
+
+    return Object.keys(TileVersions).includes(plmn);
   }
 
   private static generateB2Uri(networkName: string, countryCode: string, path: string): string {
     return `https://${B2EndpointGenerator.SERVER_HOSTNAME}/file/${B2EndpointGenerator.BUCKET_NAME}/${countryCode}/${networkName}${path}`;
-  }
-
-  private static getBlankTileUri(): string {
-    return `https://${B2EndpointGenerator.SERVER_HOSTNAME}/file/${B2EndpointGenerator.BUCKET_NAME}/256_blank_tile.png`;
   }
 
   static getB2Endpoint(uri: string): string | null {
@@ -62,6 +63,16 @@ export default class B2EndpointGenerator {
 
     if (!countryCode) {
       return null;
+    }
+
+    const tilesVersion = UriUtils.getTilesVersion(uri);
+
+    if (tilesVersion === 'latest') {
+      return B2EndpointGenerator.generateB2Uri(
+        networkName,
+        countryCode,
+        UriUtils.getPath(uri).replace('/latest/', `/${TileVersions[subdomain]}/`),
+      );
     }
 
     return B2EndpointGenerator.generateB2Uri(networkName, countryCode, UriUtils.getPath(uri));
