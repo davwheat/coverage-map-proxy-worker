@@ -2,8 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches:
-      - deploy
+  pull_request:
 
 jobs:
   deploy:
@@ -30,5 +29,6 @@ jobs:
 
       - name: Deploy worker
         uses: cloudflare/wrangler-action@2.0.0
+        if: github.ref == 'refs/heads/deploy' && github.event_name == 'push'
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
