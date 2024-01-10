@@ -10,11 +10,11 @@
     "build": "esbuild src/worker.ts --format=esm --bundle --minify --loader:.html=text --outfile=dist/worker.mjs"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230724.0",
-    "esbuild": "^0.18.17",
-    "prettier": "^3.0.0",
-    "typescript": "^5.1.6",
-    "wrangler": "^3.3.0"
+    "@cloudflare/workers-types": "^4.20231218.0",
+    "esbuild": "^0.19.11",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "wrangler": "^3.22.3"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@4.0.2"
 }
