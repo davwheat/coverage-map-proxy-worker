@@ -23,6 +23,10 @@ X-Bz-Upload-Timestamp:
 
 const GLOBAL_RESPONSE_HEADERS = {
   'Cache-Control': 'public, max-age=86400',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Max-Age': '86400',
 };
 
 const GLOBAL_REQUEST_CF_OPTIONS = {
